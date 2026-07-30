@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Attendify – Students</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/navbar.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="scripts/navbar.js" defer></script>
+  
+  <style>
+    :root {
+      --bg-primary: linear-gradient(135deg, #4f46e5, #6366f1);
+      --bg-secondary: #f8fafc;
+      --card-bg: white;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --success: #10b981;
+      --danger: #ef4444;
+      --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    [data-theme="dark"] {
+      --bg-secondary: #0f172a;
+      --card-bg: #1e293b;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: var(--bg-secondary)
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="1" fill="%234f46e50a"/><circle cx="75" cy="75" r="1.5" fill="%236366f10a"/></svg>');
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 1400px;
+      width: 100%;
+      margin: 1.5rem auto;
+      padding: 0 1.5rem;
+      flex: 1;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .header h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .search-box {
+      flex: 1;
+      max-width: 380px;
+      min-width: 240px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 0.75rem 1.1rem;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      font-size: 0.95rem;
+      min-height: 44px;
+      outline: none;
+      transition: border-color 0.25s ease;
+      background: var(--card-bg);
+      color: var(--text-primary);
+    }
+
+    .search-box input:focus {
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    .student-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .student-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .student-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: var(--bg-primary);
+      color: white;
+      font-size: 20px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.85rem;
+    }
+
+    .student-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+      color: var(--text-primary);
+      word-break: break-word;
+    }
+
+    .student-id {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      word-break: break-all;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: auto;
+      flex-wrap: wrap;
+    }
+
+    .actions button {
+      flex: 1;
+      min-width: 50px;
+      padding: 0.55rem 0.4rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      min-height: 36px;
+      text-align: center;
+    }
+
+    .actions button:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .edit { background: #4f46e5; color: white; }
+    .attendance { background: #10b981; color: white; }
+    .delete { background: #ef4444; color: white; }
+
+    .empty {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-top: 3rem;
+      font-size: 1.1rem;
+      padding: 2rem;
+    }
+
+    /* RESPONSIVE BREAKPOINTS: 2 CARDS PER ROW ON MOBILE */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+        margin: 1rem auto;
+      }
+
+      .header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+      }
+
+      .search-box {
+        max-width: 100%;
+      }
+
+      .student-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+      }
+
+      .student-card {
+        padding: 0.9rem 0.75rem;
+        border-radius: 12px;
+      }
+
+      .avatar {
+        width: 44px;
+        height: 44px;
+        font-size: 16px;
+        margin-bottom: 0.5rem;
+      }
+
+      .student-name {
+        font-size: 0.88rem;
+      }
+
+      .student-id {
+        font-size: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .actions {
+        gap: 0.25rem;
+      }
+
+      .actions button {
+        padding: 0.4rem 0.2rem;
+        font-size: 0.72rem;
+        min-height: 32px;
+        border-radius: 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-left">
+        <button class="hamburger"><i class="fas fa-bars"></i></button>
+        <div class="logo">📋 Attendify</div>
+    </div>
+    <ul class="nav-links">
+        <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a href="attendance.html"><i class="fas fa-camera"></i> Attendance</a></li>
+        <li><a href="students.html"><i class="fas fa-users"></i> Students</a></li>
+        <li><a href="register-face.html"><i class="fas fa-user-plus"></i> Register Face</a></li>
+        <li><a href="report.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+        <li class="login"><a href="login.html"><i class="fas fa-user"></i> Login</a></li>
+        <li class="logout"><a href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+  <div class="header">
+    <h2>Students</h2>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search student by name, ID or class..." />
+    </div>
+  </div>
+
+  <div class="student-grid" id="studentGrid"></div>
+  <div class="empty" id="emptyText" style="display:none;">No students found 🚫</div>
+</div>
+
+<script src="scripts/students.js"></script>
+
+</body>
+</html>

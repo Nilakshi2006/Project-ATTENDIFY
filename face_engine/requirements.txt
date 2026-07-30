@@ -1,0 +1,4 @@
+face-recognition
+opencv-contrib-python
+numpy
+pickle-mixin

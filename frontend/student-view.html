@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Attendify – Student View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/navbar.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="scripts/navbar.js" defer></script>
+  <style>
+    :root {
+        --bg-primary: linear-gradient(135deg, #4f46e5, #6366f1);
+        --bg-secondary: #f8fafc;
+        --card-bg: white;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --success: #10b981;
+        --danger: #ef4444;
+        --shadow: 0 10px 40px rgba(0,0,0,0.08);
+    }
+
+    [data-theme="dark"] {
+        --bg-secondary: #0f172a;
+        --card-bg: #1e293b;
+        --text-primary: #f1f5f9;
+        --text-secondary: #94a3b8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", sans-serif; }
+    body { 
+        background: var(--bg-secondary); 
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container {
+        max-width: 960px;
+        width: 100%;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+        flex: 1;
+    }
+
+    .profile-header {
+        background: var(--card-bg);
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .avatar {
+        width: clamp(80px, 15vw, 120px); 
+        height: clamp(80px, 15vw, 120px);
+        background: var(--bg-primary);
+        border-radius: 50%;
+        color: white; 
+        font-size: clamp(2rem, 5vw, 3rem);
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .info {
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .info h1 { 
+        font-size: clamp(1.5rem, 3vw, 2.2rem); 
+        color: var(--text-primary); 
+        margin-bottom: 0.4rem; 
+    }
+
+    .info p { 
+        color: var(--text-secondary); 
+        font-size: clamp(0.9rem, 1.5vw, 1.05rem); 
+        margin-bottom: 0.25rem;
+    }
+
+    .status {
+        margin-top: 0.75rem;
+        display: inline-block;
+        padding: 0.4rem 1rem;
+        background: #e0e7ff;
+        color: #4f46e5;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.88rem;
+    }
+
+    .edit-btn {
+        margin-left: auto; 
+        background: white; 
+        color: #4f46e5; 
+        border: 2px solid #4f46e5;
+        padding: 0.65rem 1.25rem; 
+        border-radius: 12px; 
+        font-weight: 600; 
+        cursor: pointer; 
+        transition: all 0.25s ease;
+        display: inline-flex; 
+        align-items: center; 
+        gap: 0.5rem;
+        font-size: 0.95rem;
+        min-height: 44px;
+        white-space: nowrap;
+    }
+
+    .edit-btn:hover { 
+        background: #4f46e5; 
+        color: white; 
+        transform: translateY(-2px);
+    }
+
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .stat-card {
+        background: var(--card-bg); 
+        padding: 1.25rem 1.5rem; 
+        border-radius: 16px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.04); 
+        text-align: center;
+        border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .stat-card h3 { 
+        color: var(--text-secondary); 
+        font-size: 0.95rem; 
+        margin-bottom: 0.4rem; 
+        font-weight: 600;
+    }
+
+    .stat-card p { 
+        font-size: clamp(1.75rem, 3.5vw, 2.25rem); 
+        font-weight: 700; 
+        color: var(--text-primary); 
+    }
+
+    .attendance-history-section {
+        background: var(--card-bg); 
+        padding: clamp(1.25rem, 3vw, 2rem); 
+        border-radius: 20px;
+        box-shadow: var(--shadow); 
+        margin-bottom: 2.5rem;
+    }
+
+    .attendance-history-section h2 {
+        margin-bottom: 1.25rem; 
+        color: var(--text-primary); 
+        font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    }
+
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+        gap: 0.75rem;
+    }
+
+    .day-badge {
+        display: flex; 
+        flex-direction: column; 
+        align-items: center;
+        padding: 0.6rem 0.4rem; 
+        border-radius: 12px; 
+        font-weight: 600; 
+        font-size: 1rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+    }
+
+    .day-badge.present { background: #d1fae5; color: #065f46; border: 1px solid #10b981; }
+    .day-badge.absent { background: #fee2e2; color: #991b1b; border: 1px solid #ef4444; }
+    .day-badge span { font-size: 0.72rem; opacity: 0.85; margin-top: 3px; font-weight: 400;}
+
+    /* MODAL STYLES */
+    .modal-overlay {
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100%;
+        background: rgba(0,0,0,0.5); 
+        backdrop-filter: blur(5px);
+        display: none; 
+        justify-content: center; 
+        align-items: center; 
+        z-index: 2000;
+        padding: 1rem;
+        animation: fadeIn 0.3s ease;
+    }
+
+    .modal-card {
+        background: white; 
+        padding: clamp(1.5rem, 4vw, 2.5rem); 
+        border-radius: 20px;
+        width: 100%; 
+        max-width: 460px; 
+        box-shadow: var(--shadow);
+        animation: slideUp 0.3s ease;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    .modal-card h2 { margin-bottom: 1.25rem; color: var(--text-primary); font-size: 1.4rem; }
+    .input-group { margin-bottom: 1.1rem; }
+    .input-group label { display: block; margin-bottom: 0.4rem; font-weight: 600; color: var(--text-secondary); font-size: 0.9rem; }
+    .input-group input { 
+        width: 100%; padding: 0.75rem 1rem; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 0.95rem; min-height: 44px;
+    }
+    .input-group input:focus { outline: none; border-color: #4f46e5; }
+    
+    .modal-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .btn { 
+        padding: 0.75rem 1.25rem; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; transition: all 0.25s ease;
+        flex: 1; min-height: 44px; font-size: 0.95rem;
+    }
+    .btn-primary { background: var(--bg-primary); color: white; }
+    .btn-secondary { background: #f1f5f9; color: var(--text-primary); }
+    .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+    /* RESPONSIVE BREAKPOINTS */
+    @media (max-width: 768px) {
+        .container {
+            padding: 0 1rem;
+            margin: 1rem auto;
+        }
+
+        .profile-header {
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .edit-btn {
+            margin-left: 0;
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .stats {
+            grid-template-columns: 1fr;
+        }
+
+        .calendar-grid {
+            grid-template-columns: repeat(auto-fill, minmax(55px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .modal-actions {
+            flex-direction: column;
+        }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-left">
+        <button class="hamburger"><i class="fas fa-bars"></i></button>
+        <div class="logo">📋 Attendify</div>
+    </div>
+    <ul class="nav-links">
+        <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a href="attendance.html"><i class="fas fa-camera"></i> Attendance</a></li>
+        <li><a href="students.html"><i class="fas fa-users"></i> Students</a></li>
+        <li><a href="register-face.html"><i class="fas fa-user-plus"></i> Register Face</a></li>
+        <li><a href="report.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+        <li class="login"><a href="login.html"><i class="fas fa-user"></i> Login</a></li>
+        <li class="logout"><a href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <div class="profile-header">
+        <div class="avatar" id="studentAvatar">?</div>
+        <div class="info">
+            <h1 id="studentName">Loading...</h1>
+            <p>Student ID: <span id="studentId">---</span></p>
+            <p>Class: <span id="studentClass">---</span></p>
+            <div class="status" id="faceStatus">Face Profile Active</div>
+        </div>
+        <button class="edit-btn" id="openEditModal">
+            <i class="fas fa-edit"></i> Edit Profile
+        </button>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">
+            <h3>Total Classes</h3>
+            <p id="totalClasses">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>Present</h3>
+            <p id="totalPresent">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>Attendance %</h3>
+            <p id="attendancePercent">0%</p>
+        </div>
+    </div>
+
+    <div class="attendance-history-section">
+        <h2 id="calendarMonthTitle">Monthly Attendance</h2>
+        <div class="calendar-grid" id="calendarGrid">
+            <!-- Dynamic days will be injected here -->
+        </div>
+    </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal-overlay" id="editModal">
+    <div class="modal-card">
+        <h2>Edit Student Profile</h2>
+        <div class="input-group">
+            <label for="editName">Full Name</label>
+            <input type="text" id="editName" placeholder="Enter full name">
+        </div>
+        <div class="input-group">
+            <label for="editId">Student ID (Read Only)</label>
+            <input type="text" id="editId" readonly style="background: #f8fafc; color: #64748b;">
+        </div>
+        <div class="input-group">
+            <label for="editClass">Class</label>
+            <input type="text" id="editClass" placeholder="Enter class name">
+        </div>
+        <div class="modal-actions">
+            <button class="btn btn-secondary" id="closeModal">Cancel</button>
+            <button class="btn btn-primary" id="saveStudentBtn">Save Changes</button>
+        </div>
+    </div>
+</div>
+
+<script src="scripts/student-view.js"></script>
+</body>
+</html>

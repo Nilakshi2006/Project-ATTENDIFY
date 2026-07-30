@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Attendify | Dashboard</title>
+
+    <link rel="stylesheet" href="styles/dashboard.css" />
+    <link rel="stylesheet" href="styles/navbar.css" />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <script src="scripts/navbar.js" defer></script>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="nav-left">
+        <button class="hamburger">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="logo">📋 Attendify</div>
+      </div>
+
+      <ul class="nav-links">
+        <li>
+          <a href="dashboard.html">
+            <i class="fas fa-home"></i>
+            Dashboard
+          </a>
+        </li>
+
+        <li>
+          <a href="attendance.html">
+            <i class="fas fa-camera"></i>
+            Attendance
+          </a>
+        </li>
+
+        <li>
+          <a href="students.html">
+            <i class="fas fa-users"></i>
+            Students
+          </a>
+        </li>
+
+        <li>
+          <a href="register-face.html">
+            <i class="fas fa-user-plus"></i>
+            Register Face
+          </a>
+        </li>
+
+        <li>
+          <a href="report.html">
+            <i class="fas fa-chart-bar"></i>
+            Reports
+          </a>
+        </li>
+
+        <li class="login">
+          <a href="login.html">
+            <i class="fas fa-user"></i>
+            Login
+          </a>
+        </li>
+
+        <li class="logout">
+          <a href="logout.html">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- DASHBOARD -->
+    <main class="dashboard">
+      <header>
+        <h1>
+          <i class="fas fa-tachometer-alt"></i>
+          Dashboard
+        </h1>
+
+        <p class="subtitle">
+          Today's Attendance Overview -
+          <span id="currentDate"></span>
+        </p>
+      </header>
+
+      <!-- QUICK ACTIONS -->
+      <section class="quick-actions">
+        <a href="attendance.html" class="cta-btn">
+          <i class="fas fa-play"></i>
+          Start Attendance Session
+        </a>
+
+        <button class="cta-btn danger" onclick="deleteTodayAttendance()">
+          <i class="fas fa-trash"></i>
+          Delete Today's Attendance
+        </button>
+
+        <input
+          type="text"
+          id="searchStudents"
+          placeholder="Search students or classes..."
+        />
+      </section>
+
+      <!-- CARDS -->
+      <div class="cards">
+        <div class="card total">
+          <div class="card-icon">👥</div>
+          <h3>Total Students</h3>
+          <h2 id="totalStudents">—</h2>
+        </div>
+
+        <div class="card present">
+          <div class="card-icon">✅</div>
+          <h3>Present Today</h3>
+          <h2 id="presentToday">—</h2>
+        </div>
+
+        <div class="card absent">
+          <div class="card-icon">❌</div>
+          <h3>Absent Today</h3>
+          <h2 id="absentToday">—</h2>
+        </div>
+      </div>
+
+      <!-- RECENT ACTIVITY -->
+      <section class="recent-activity">
+        <h3>
+          Recent Attendance
+          <i class="fas fa-clock"></i>
+        </h3>
+
+        <div class="table-container">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Student ID</th>
+                  <th>Student Name</th>
+                  <th>Time</th>
+                  <th>Status</th>
+                  <th>Class</th>
+                </tr>
+              </thead>
+
+              <tbody id="recentTable">
+                <tr>
+                  <td colspan="5" class="loading-row">
+                    Loading recent attendance...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="copyright">
+      <p>&copy; 2026 Attendify by Nilakshi. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts/dashboard.js"></script>
+  </body>
+</html>

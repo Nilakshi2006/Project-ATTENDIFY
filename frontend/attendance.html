@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Attendify | Attendance</title>
+
+    <!-- Attendance CSS -->
+    <link rel="stylesheet" href="styles/attendance.css" />
+    <!-- Navbar CSS -->
+    <link rel="stylesheet" href="styles/navbar.css" />
+
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Navbar Script -->
+    <script src="scripts/navbar.js" defer></script>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="nav-left">
+        <button class="hamburger">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="logo">📋 Attendify</div>
+      </div>
+
+      <ul class="nav-links">
+        <li>
+          <a href="dashboard.html">
+            <i class="fas fa-home"></i>
+            Dashboard
+          </a>
+        </li>
+
+        <li>
+          <a href="attendance.html">
+            <i class="fas fa-camera"></i>
+            Attendance
+          </a>
+        </li>
+
+        <li>
+          <a href="students.html">
+            <i class="fas fa-users"></i>
+            Students
+          </a>
+        </li>
+
+        <li>
+          <a href="register-face.html">
+            <i class="fas fa-user-plus"></i>
+            Register Face
+          </a>
+        </li>
+
+        <li>
+          <a href="report.html">
+            <i class="fas fa-chart-bar"></i>
+            Reports
+          </a>
+        </li>
+
+        <li class="login">
+          <a href="login.html">
+            <i class="fas fa-user"></i>
+            Login
+          </a>
+        </li>
+
+        <li class="logout">
+          <a href="logout.html">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="attendance">
+      <header>
+        <h1>
+          <i class="fas fa-camera"></i>
+          Live Attendance
+        </h1>
+
+        <p class="subtitle" id="sessionInfo">
+          Click START to begin attendance session
+        </p>
+      </header>
+
+      <!-- CONTROL SECTION -->
+      <section class="controls">
+        <div class="btn-group">
+          <button class="cta-btn" id="startBtn">
+            <i class="fas fa-play"></i>
+            START Attendance
+          </button>
+
+          <button class="stop-btn" id="stopBtn" disabled>
+            <i class="fas fa-stop"></i>
+            STOP Session
+          </button>
+        </div>
+
+        <div class="session-stats">
+          <span>
+            Scanned:
+            <span id="scanCount">0</span>
+          </span>
+
+          <span>
+            Marked:
+            <span id="markedCount">0</span>
+          </span>
+
+          <span id="statusMsg" class="status-badge"> Ready </span>
+        </div>
+      </section>
+
+      <!-- CAMERA + RESULTS -->
+      <div class="attendance-container">
+        <!-- CAMERA SECTION -->
+        <div class="video-section">
+          <video
+            id="webcam"
+            autoplay
+            muted
+            playsinline
+          ></video>
+
+          <!-- Hidden Canvas -->
+          <canvas id="canvas" style="display: none"> </canvas>
+
+          <!-- Face Detection Overlay -->
+          <div id="faceContainer"></div>
+        </div>
+
+        <!-- RESULTS SECTION -->
+        <div class="results-section">
+          <h3>
+            Today's Attendance
+            <i class="fas fa-list"></i>
+          </h3>
+
+          <div class="results-list" id="resultsList">
+            <div class="empty-state">
+              <i class="fas fa-user-check"></i>
+              <p>Attendance will appear here during session</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="copyright">
+      <p>
+        &copy; 2026 Attendify by Nilakshi. All rights reserved.
+      </p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="scripts/attendance.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"
+    ></script>
+  </body>
+</html>

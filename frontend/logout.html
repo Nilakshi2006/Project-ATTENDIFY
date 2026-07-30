@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendify | Logging Out...</title>
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: linear-gradient(135deg, #4f46e5, #6366f1);
+            --bg-secondary: #f8fafc;
+            --card-bg: white;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", sans-serif; }
+        body { 
+            background: var(--bg-secondary); 
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logout-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        .logout-card {
+            background: white;
+            padding: clamp(2rem, 5vw, 3.5rem);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            max-width: 480px;
+            width: 100%;
+            animation: fadeIn 0.6s ease-out;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #e0e7ff;
+            border-top: 5px solid #4f46e5;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .logout-card h1 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--text-primary);
+            margin-bottom: 0.85rem;
+        }
+
+        .logout-card p {
+            color: var(--text-secondary);
+            font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+        }
+
+        .logo-font {
+            background: var(--bg-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            font-weight: 800;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.85rem;
+            justify-content: center;
+            margin-top: 1.75rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-logout, .btn-cancel {
+            padding: 0.85rem 1.5rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border: none;
+            flex: 1;
+            min-width: 140px;
+            min-height: 44px;
+        }
+
+        .btn-logout {
+            background: var(--bg-primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-logout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-cancel {
+            background: #f1f5f9;
+            color: var(--text-primary);
+        }
+
+        .btn-cancel:hover {
+            background: #e2e8f0;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 480px) {
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn-logout, .btn-cancel {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-left">
+        <button class="hamburger"><i class="fas fa-bars"></i></button>
+        <div class="logo">📋 Attendify</div>
+    </div>
+    <ul class="nav-links">
+        <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a href="attendance.html"><i class="fas fa-camera"></i> Attendance</a></li>
+        <li><a href="students.html"><i class="fas fa-users"></i> Students</a></li>
+        <li><a href="register-face.html"><i class="fas fa-user-plus"></i> Register Face</a></li>
+        <li><a href="report.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+        <li class="login"><a href="login.html"><i class="fas fa-user"></i> Login</a></li>
+        <li class="logout"><a href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+</nav>
+
+<div class="logout-container">
+    <div class="logout-card">
+        <div id="logout-confirm">
+            <h1 id="nav-logout-message">Log Out?</h1>
+            <p id="logout-email-text">Are you sure you want to log out as ...?</p>
+            <div class="btn-group">
+                <button class="btn-logout" id="confirmLogoutBtn">Yes, Log Out</button>
+                <button class="btn-cancel" id="cancelLogoutBtn">No, Keep Me In</button>
+            </div>
+        </div>
+
+        <div id="logout-processing" class="hidden">
+            <div class="spinner"></div>
+            <h1>Logging Out...</h1>
+            <p>Wait a moment while we secure your session...</p>
+        </div>
+    </div>
+</div>
+
+<script src="scripts/navbar.js" defer></script>
+<script src="scripts/logout.js" defer></script>
+
+</body>
+</html>

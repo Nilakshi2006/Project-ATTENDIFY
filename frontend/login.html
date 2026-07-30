@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles/navbar.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script src="scripts/navbar.js" defer></script>
+
+<title>Attendify | Login</title>
+
+<style>
+:root {
+    --bg-primary: linear-gradient(135deg, #4f46e5, #6366f1);
+    --bg-secondary: #f8fafc;
+    --card-bg: white;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --success: #10b981;
+    --danger: #ef4444;
+    --purple: #8b5cf6;
+    --shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] {
+    --bg-secondary: #0f172a;
+    --card-bg: #1e293b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body { 
+    background: var(--bg-secondary) url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%234f46e50a"/><circle cx="75" cy="75" r="1.5" fill="%236366f10a"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>'); 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr minmax(320px, 460px);
+    flex: 1;
+    min-height: calc(100vh - 64px);
+    width: 100%;
+}
+
+/* ================= LEFT SIDE (LAPTOP BRANDING) ================= */
+.left {
+    background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(1rem, 3vw, 4rem);
+    text-align: center;
+}
+
+.left img {
+    width: clamp(100px, 22vw, 300px);
+    height: auto;
+    margin-bottom: clamp(0.75rem, 2vw, 2rem);
+}
+
+.hero h1 {
+    font-size: clamp(1.3rem, 3vw, 2.75rem);
+    font-weight: 800;
+    background: var(--bg-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    margin-bottom: 0.5rem;
+    line-height: 1.15;
+}
+
+.hero p {
+    color: var(--text-secondary);
+    font-size: clamp(0.75rem, 1.2vw, 1.1rem);
+    margin-bottom: clamp(1rem, 2.5vw, 2rem);
+    max-width: 440px;
+}
+
+.features {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.4rem, 1vw, 0.85rem);
+    width: 100%;
+    max-width: 360px;
+}
+
+.feature {
+    background: white;
+    padding: clamp(0.5rem, 1vw, 0.85rem) clamp(0.75rem, 1.5vw, 1.25rem);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-weight: 500;
+    font-size: clamp(0.72rem, 1vw, 0.95rem);
+    transition: transform 0.25s ease;
+}
+
+.feature:hover {
+    transform: translateX(4px);
+}
+
+/* ================= RIGHT SIDE (LAPTOP FORM CARD) ================= */
+.right-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1rem, 2.5vw, 3rem);
+}
+
+.form-card {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(25px);
+    padding: clamp(1.25rem, 3vw, 3rem);
+    border-radius: 20px;
+    box-shadow: 0 20px 45px rgba(37, 99, 235, 0.12),
+        0 0 0 1px rgba(255, 255, 255, 0.8);
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.form-card .logo {
+    font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.form-card .logo span {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.form-card h2 {
+    font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+    margin-bottom: 0.35rem;
+    color: #1E293B;
+    text-align: center;
+}
+
+.form-card p {
+    color: #64748B;
+    margin-bottom: 1.25rem;
+    text-align: center;
+    font-size: clamp(0.78rem, 1vw, 0.95rem);
+}
+
+.input-group {
+    margin-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-weight: 600;
+    color: #374151;
+    font-size: clamp(0.75rem, 1vw, 0.9rem);
+}
+
+.input-group input {
+    width: 100%;
+    padding: clamp(0.55rem, 1.2vw, 0.85rem) clamp(0.75rem, 1.5vw, 1.1rem);
+    border: 2px solid #E2E8F0;
+    border-radius: 10px;
+    font-size: clamp(0.82rem, 1vw, 1rem);
+    transition: all 0.3s ease;
+    background: #F8FAFC;
+    min-height: 40px;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    font-size: clamp(0.72rem, 1vw, 0.9rem);
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.remember-me input {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    accent-color: #4f46e5;
+}
+
+.form-options a {
+    color: #4f46e5;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.form-options a:hover {
+    color: #6366f1;
+    text-decoration: underline;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: clamp(0.65rem, 1.5vw, 0.9rem) 1.25rem;
+    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: clamp(0.88rem, 1.1vw, 1.05rem);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+    margin-top: 0.25rem;
+    box-shadow: 0 8px 16px rgba(37, 99, 235, 0.2);
+    min-height: 42px;
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(37, 99, 235, 0.35);
+}
+
+.error-msg {
+    background: #FEF2F2;
+    color: #DC2626;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-top: 0.85rem;
+    text-align: center;
+    font-weight: 500;
+    border: 1px solid #FECACA;
+    display: none;
+    font-size: 0.82rem;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 1.1rem 0;
+    color: #94A3B8;
+    font-weight: 500;
+    font-size: 0.82rem;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #E2E8F0;
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 1rem;
+    color: #64748B;
+    font-size: clamp(0.75rem, 1vw, 0.9rem);
+}
+
+.signup-link a {
+    color: #4f46e5;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* TABLET: Split-screen side-by-side layout */
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .left {
+        padding: clamp(1rem, 3vw, 2rem);
+    }
+
+    .left img {
+        width: clamp(100px, 18vw, 200px);
+        margin-bottom: 1rem;
+    }
+
+    .hero p {
+        margin-bottom: 1rem;
+    }
+
+    .right-section {
+        padding: clamp(1rem, 2vw, 2rem);
+    }
+
+    .form-card {
+        padding: clamp(1rem, 2.5vw, 2rem);
+        border-radius: 16px;
+    }
+}
+
+/* MOBILE: Single column, form only (left hidden) */
+@media (max-width: 540px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .left {
+        display: none;
+    }
+
+    .right-section {
+        padding: 1.5rem 1rem;
+    }
+
+    .form-card {
+        padding: 1.75rem 1.25rem;
+        border-radius: 18px;
+        max-width: 100%;
+    }
+
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-left">
+        <button class="hamburger"><i class="fas fa-bars"></i></button>
+        <div class="logo">📋 Attendify</div>
+    </div>
+    <ul class="nav-links">
+        <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a href="attendance.html"><i class="fas fa-camera"></i> Attendance</a></li>
+        <li><a href="students.html"><i class="fas fa-users"></i> Students</a></li>
+        <li><a href="register-face.html"><i class="fas fa-user-plus"></i> Register Face</a></li>
+        <li><a href="report.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+        <li class="login"><a href="login.html"><i class="fas fa-user"></i> Login</a></li>
+        <li class="logout"><a href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+
+    <!-- LEFT SIDE (LAPTOP LOOK) -->
+    <div class="left">
+        <img src="https://cdn-icons-png.flaticon.com/512/6660/6660666.png" alt="Attendify Illustration">
+        <div class="hero">
+            <h1>Welcome Back</h1>
+            <p>Login to manage your smart face recognition attendance system.</p>
+        </div>
+
+        <div class="features">
+            <div class="feature">📷 Face Recognition</div>
+            <div class="feature">⚡ Real-Time Tracking</div>
+            <div class="feature">📊 Attendance Reports</div>
+            <div class="feature">🔒 Secure System</div>
+        </div>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div class="right-section">
+        <div class="form-card">
+            <div class="logo"><span>Attendify</span></div>
+            
+            <h2>LOGIN</h2>
+            <p>Don't have an account? <a href="signup.html">Create one</a></p>
+
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="login-email">Email Address</label>
+                    <input id="login-email" type="email" placeholder="you@example.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="login-password">Password</label>
+                    <input id="login-password" type="password" placeholder="Enter your password" required>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember-me">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#forgot">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+
+            <div id="login-error" class="error-msg"></div>
+
+            <div class="divider">or</div>
+
+            <div class="signup-link">
+                New to Attendify? <a href="signup.html">Create your account</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="scripts/login.js"></script>
+</body>
+</html>

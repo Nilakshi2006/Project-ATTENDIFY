@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendify | Register Face</title>
+    <link rel="stylesheet" href="styles/register-face.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="scripts/navbar.js" defer></script>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-left">
+        <button class="hamburger"><i class="fas fa-bars"></i></button>
+        <div class="logo">📋 Attendify</div>
+    </div>
+    <ul class="nav-links">
+        <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a href="attendance.html"><i class="fas fa-camera"></i> Attendance</a></li>
+        <li><a href="students.html"><i class="fas fa-users"></i> Students</a></li>
+        <li><a href="register-face.html"><i class="fas fa-user-plus"></i> Register Face</a></li>
+        <li><a href="report.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+        <li class="login"><a href="login.html"><i class="fas fa-user"></i> Login</a></li>
+        <li class="logout"><a href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="attendance">
+
+    <header>
+        <h1><i class="fas fa-user-plus"></i> Register Student Face</h1>
+        <p class="subtitle">Capture multiple images for AI training</p>
+    </header>
+
+    <!-- STUDENT FORM CONTROLS -->
+    <section class="controls">
+        <div class="input-grid">
+            <div class="field">
+                <input type="text" id="studentName" placeholder="Enter Student Name" required>
+            </div>
+            <div class="field">
+                <input type="text" id="studentId" placeholder="Enter Student ID" required>
+            </div>
+            <div class="field">
+                <input type="text" id="studentClass" placeholder="Enter Class (e.g. CS101)" required>
+            </div>
+        </div>
+
+        <div class="button-grid">
+            <button class="cta-btn" id="startCamera">
+                <i class="fas fa-video"></i> Start Camera
+            </button>
+
+            <button class="cta-btn" id="captureBtn" disabled>
+                <i class="fas fa-camera"></i> Capture Face
+            </button>
+
+            <button class="stop-btn" id="saveBtn" disabled>
+                <i class="fas fa-save"></i> Save & Train
+            </button>
+        </div>
+    </section>
+
+    <!-- CAMERA SECTION -->
+    <div class="attendance-container">
+
+        <div class="video-section">
+            <video id="video" autoplay muted playsinline></video>
+            <canvas id="canvas" style="display:none;"></canvas>
+
+            <div id="faceBox"></div>
+        </div>
+
+        <!-- Capture Info -->
+        <div class="results-section">
+            <h3>Capture Progress</h3>
+
+            <div class="results-list" id="captureList">
+                <div class="empty-state">
+                    <i class="fas fa-camera"></i>
+                    <p>No images captured yet</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</main>
+<footer class="copyright">
+    <p>&copy; 2026 Attendify by Nilakshi. All rights reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+<script src="scripts/register-face.js"></script>
+
+</body>
+</html>

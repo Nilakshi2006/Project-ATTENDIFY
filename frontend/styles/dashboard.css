@@ -1,0 +1,391 @@
+/* =====================================
+      ATTENDIFY DASHBOARD CSS
+      RESPONSIVE VERSION
+===================================== */
+
+:root {
+  --bg-primary: linear-gradient(135deg, #4f46e5, #6366f1);
+  --bg-secondary: #f8fafc;
+  --card-bg: white;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --success: #10b981;
+  --danger: #ef4444;
+  --purple: #8b5cf6;
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] {
+  --bg-secondary: #0f172a;
+  --card-bg: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: var(--bg-secondary)
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="1" fill="%234f46e50a"/><circle cx="75" cy="75" r="1.5" fill="%236366f10a"/></svg>');
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===========================
+        DASHBOARD LAYOUT
+=========================== */
+
+.dashboard {
+  max-width: 1400px;
+  width: 100%;
+  margin: 1.5rem auto;
+  padding: 0 1.5rem;
+  flex: 1;
+}
+
+header h1 {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+}
+
+/* ===========================
+        QUICK ACTIONS
+=========================== */
+
+.quick-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.cta-btn {
+  background: var(--success);
+  color: white;
+  border: none;
+  padding: 0.85rem 1.5rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  min-height: 46px;
+  white-space: nowrap;
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+}
+
+.cta-btn.danger {
+  background: var(--danger);
+}
+
+.cta-btn.danger:hover {
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35);
+}
+
+#searchStudents {
+  flex: 1;
+  min-width: 260px;
+  padding: 0.85rem 1.25rem;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  font-size: 1rem;
+  min-height: 46px;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  transition: border-color 0.25s ease;
+}
+
+#searchStudents:focus {
+  outline: none;
+  border-color: var(--purple);
+}
+
+/* ===========================
+        STAT CARDS
+=========================== */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.card {
+  background: var(--card-bg);
+  padding: 1.5rem 1.25rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--bg-primary);
+}
+
+.card.present::before {
+  background: var(--success);
+}
+
+.card.absent::before {
+  background: var(--danger);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.card-icon {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  margin-bottom: 0.5rem;
+}
+
+.card h3 {
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+  font-size: clamp(0.85rem, 1.2vw, 1.05rem);
+  font-weight: 600;
+}
+
+.card h2 {
+  color: var(--text-primary);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+}
+
+/* ===========================
+      TABLE SECTION (HORIZONTAL ON MOBILE)
+=========================== */
+
+.recent-activity h3 {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.table-container {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 620px;
+}
+
+th,
+td {
+  padding: 0.9rem 1.25rem;
+  text-align: left;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+th {
+  background: var(--bg-primary);
+  color: white;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+tbody tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+  background: rgba(79, 70, 229, 0.04);
+}
+
+.status-present {
+  color: var(--success);
+  font-weight: 600;
+}
+
+.status-absent {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.loading-row {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 2rem;
+}
+
+/* ===========================
+        FOOTER
+=========================== */
+
+.copyright {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  margin-top: 2.5rem;
+  font-size: 0.9rem;
+}
+
+/* =================================
+          TABLET BREAKPOINTS
+================================= */
+
+@media (max-width: 1024px) {
+  .dashboard {
+    padding: 0 1.25rem;
+  }
+
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .card {
+    padding: 1.25rem 1rem;
+  }
+}
+
+/* =================================
+          MOBILE BREAKPOINTS
+================================= */
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 0 1rem;
+    margin: 1rem auto;
+  }
+
+  .quick-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .cta-btn {
+    width: 100%;
+  }
+
+  #searchStudents {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .card {
+    padding: 1rem 0.6rem;
+    border-radius: 14px;
+  }
+
+  .card-icon {
+    font-size: 1.75rem;
+  }
+
+  .card h3 {
+    font-size: 0.8rem;
+  }
+
+  .card h2 {
+    font-size: 1.6rem;
+  }
+
+  th, td {
+    padding: 0.75rem 0.85rem;
+    font-size: 0.88rem;
+  }
+
+  .table-scroll {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    min-width: 580px;
+  }
+}
+
+/* =================================
+          SMALL PHONES (<480px)
+================================= */
+
+@media (max-width: 480px) {
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .card {
+    padding: 1.25rem;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 1.25rem;
+    text-align: left;
+  }
+
+  .card-icon {
+    font-size: 2.2rem;
+    margin-bottom: 0;
+  }
+
+  .card h2 {
+    font-size: 1.8rem;
+  }
+}

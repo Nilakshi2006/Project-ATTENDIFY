@@ -1,0 +1,325 @@
+/* ========================================
+   ATTENDIFY REGISTER FACE CSS
+   RESPONSIVE VERSION
+======================================== */
+
+:root {
+  --bg-primary: linear-gradient(135deg, #4f46e5, #6366f1);
+  --bg-secondary: #f8fafc;
+  --card-bg: white;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --success: #10b981;
+  --danger: #ef4444;
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* DARK MODE */
+[data-theme="dark"] {
+  --bg-secondary: #0f172a;
+  --card-bg: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: var(--bg-secondary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========================================
+   MAIN LAYOUT
+======================================== */
+
+.attendance {
+  max-width: 1400px;
+  width: 100%;
+  margin: 1.5rem auto;
+  padding: 0 1.5rem;
+  flex: 1;
+}
+
+header h1 {
+  font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+}
+
+/* ========================================
+   CONTROLS SECTION
+======================================== */
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.input-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.controls input {
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.25s ease;
+  min-height: 46px;
+}
+
+.controls input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.button-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cta-btn,
+.stop-btn {
+  border: none;
+  padding: 0.85rem 1.5rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  min-height: 46px;
+  flex: 1;
+  min-width: 150px;
+  white-space: nowrap;
+}
+
+.cta-btn {
+  background: var(--success);
+  color: white;
+}
+
+.cta-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+}
+
+.stop-btn {
+  background: var(--danger);
+  color: white;
+}
+
+.stop-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35);
+}
+
+.cta-btn:disabled,
+.stop-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ========================================
+   LAYOUT GRID
+======================================== */
+
+.attendance-container {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* ========================================
+   VIDEO SECTION
+======================================== */
+
+.video-section {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#video,
+#webcam {
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 16px;
+  background: #0f172a;
+  display: block;
+}
+
+#faceBox {
+  position: absolute;
+  border: 3px solid #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  pointer-events: none;
+  z-index: 100;
+  display: none;
+  border-radius: 8px;
+}
+
+/* ========================================
+   RESULTS / CAPTURE SECTION
+======================================== */
+
+.results-section h3 {
+  font-size: clamp(1.2rem, 2vw, 1.4rem);
+  margin-bottom: 0.85rem;
+  color: var(--text-primary);
+}
+
+.results-list {
+  background: var(--card-bg);
+  border-radius: 16px;
+  height: 480px;
+  max-height: 60vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow);
+  padding: 0.75rem;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: background 0.25s ease;
+}
+
+.result-item:hover {
+  background: rgba(79, 70, 229, 0.04);
+}
+
+.result-item.present {
+  border-left: 4px solid var(--success);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.result-info strong {
+  color: var(--text-primary);
+  display: block;
+  font-size: 0.95rem;
+}
+
+.result-info span {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--text-secondary);
+}
+
+.empty-state i {
+  font-size: 3.5rem;
+  margin-bottom: 0.85rem;
+  opacity: 0.35;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.copyright {
+  text-align: center;
+  padding: 1.5rem;
+  color: var(--text-secondary);
+  background: var(--card-bg);
+  margin-top: 2.5rem;
+  font-size: 0.9rem;
+}
+
+/* ========================================
+   RESPONSIVE BREAKPOINTS
+======================================== */
+
+@media (max-width: 1024px) {
+  .attendance-container {
+    grid-template-columns: 1fr;
+  }
+
+  .video-section {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .results-list {
+    height: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .attendance {
+    padding: 0 1rem;
+    margin: 1rem auto;
+  }
+
+  .controls {
+    padding: 1rem;
+  }
+
+  .button-grid {
+    flex-direction: column;
+  }
+
+  .cta-btn,
+  .stop-btn {
+    width: 100%;
+  }
+
+  .results-list {
+    height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .input-grid {
+    grid-template-columns: 1fr;
+  }
+}
