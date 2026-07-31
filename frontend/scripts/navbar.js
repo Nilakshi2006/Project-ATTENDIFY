@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const href = link.getAttribute("href");
             if (href === currentPath) {
                 link.classList.add("active");
-            } else if (currentPath === "" && href === "dashboard.html") {
+            } else if (currentPath === "" && href === "index.html") {
                 link.classList.add("active");
             }
         });

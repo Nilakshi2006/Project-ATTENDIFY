@@ -15,7 +15,7 @@ async function initLogout() {
     // 2. Setup button listeners
     document.getElementById("confirmLogoutBtn").addEventListener("click", processLogout);
     document.getElementById("cancelLogoutBtn").addEventListener("click", () => {
-        window.location.href = "dashboard.html";
+        window.location.href = "index.html";
     });
 }
 
