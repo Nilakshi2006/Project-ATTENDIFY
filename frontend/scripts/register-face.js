@@ -18,7 +18,7 @@ const studentIdParam = urlParams.get('studentId');
 async function initFields() {
     if (studentIdParam) {
         try {
-            const res = await fetch("http://localhost:5000/api/students");
+            const res = await fetch("https://project-attendify.onrender.com//api/students");
             const students = await res.json();
             const student = students.find(s => s._id === studentIdParam || s.studentId === studentIdParam);
             if (student) {
@@ -100,7 +100,7 @@ saveBtn.addEventListener("click", async () => {
     saveBtn.disabled = true;
 
     try {
-        const response = await fetch("http://localhost:5000/api/train/register-face", {
+        const response = await fetch("https://project-attendify.onrender.com//api/train/register-face", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, id, studentClass, images })

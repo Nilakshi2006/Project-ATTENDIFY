@@ -16,7 +16,7 @@ router.post("/register-face", async (req, res) => {
     }
 
     // 1. Ensure Face Engine Directory Exists
-    const faceEngineDir = path.join(__dirname, "../..", "face_engine");
+    const faceEngineDir = path.join(__dirname, "..", "face_engine");
     const datasetDir = path.join(faceEngineDir, "faces", "students", id);
 
     if (!fs.existsSync(datasetDir)) {
@@ -41,7 +41,9 @@ router.post("/register-face", async (req, res) => {
 
     // 4. Trigger Model Training
     const pythonScriptPath = path.join(faceEngineDir, "train_lbph.py");
-    const python = spawn("python", [pythonScriptPath], { cwd: faceEngineDir });
+    const python = spawn("python3", [pythonScriptPath], {
+    cwd: faceEngineDir
+});
 
     python.stdout.on("data", (data) => {
       console.log(`Train Python: ${data}`);

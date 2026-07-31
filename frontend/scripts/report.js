@@ -1,5 +1,5 @@
-const ATTENDANCE_API = "http://localhost:5000/api/attendance/today";
-const STUDENT_API = "http://localhost:5000/api/students";
+const ATTENDANCE_API = "https://project-attendify.onrender.com//api/attendance/today";
+const STUDENT_API = "https://project-attendify.onrender.com//api/students";
 
 let attendanceData = [];
 let studentData = [];
