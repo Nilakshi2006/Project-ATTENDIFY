@@ -1,7 +1,7 @@
 
 
-const STUDENT_API = "https://project-attendify.onrender.com//api/students";
-const ATTENDANCE_API = "https://project-attendify.onrender.com//api/attendance/today";
+const STUDENT_API = "https://project-attendify.onrender.com/api/students";
+const ATTENDANCE_API = "https://project-attendify.onrender.com/api/attendance/today";
 
 // Display current date on header
 document.getElementById("currentDate").innerText =

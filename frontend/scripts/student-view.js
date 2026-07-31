@@ -17,7 +17,7 @@ async function fetchStudentDetails() {
     }
 
     try {
-        const res = await fetch("https://project-attendify.onrender.com//api/students");
+        const res = await fetch("https://project-attendify.onrender.com/api/students");
         const students = await res.json();
         
         currentStudent = students.find(s => s._id === studentId);
@@ -35,7 +35,7 @@ async function fetchStudentDetails() {
         }
 
         // Fetch Attendance History
-        const attRes = await fetch(`https://project-attendify.onrender.com//api/attendance/student/${studentId}`);
+        const attRes = await fetch(`https://project-attendify.onrender.com/api/attendance/student/${studentId}`);
         const attendanceData = await attRes.json();
         
         if (attendanceData && typeof attendanceData.totalClasses !== 'undefined') {
@@ -89,7 +89,7 @@ saveStudentBtn.addEventListener("click", async () => {
     const updatedClass = document.getElementById("editClass").value;
 
     try {
-        const response = await fetch(`https://project-attendify.onrender.com//api/students/${currentStudent._id}`, {
+        const response = await fetch(`https://project-attendify.onrender.com/api/students/${currentStudent._id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: updatedName, class: updatedClass })

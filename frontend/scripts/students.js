@@ -1,4 +1,4 @@
-  const API_URL = "https://project-attendify.onrender.com//api/students";
+  const API_URL = "https://project-attendify.onrender.com/api/students";
   let students = [];
 
   function getAvatarColor(name) {

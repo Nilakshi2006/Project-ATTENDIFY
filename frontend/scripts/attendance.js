@@ -1,5 +1,5 @@
 // ================= CONFIG =================
-const ATTENDANCE_API_MARK = "https://project-attendify.onrender.com//api/attendance/mark";
+const ATTENDANCE_API_MARK = "https://project-attendify.onrender.com/api/attendance/mark";
 
 // ================= ELEMENTS =================
 const webcam = document.getElementById("webcam");

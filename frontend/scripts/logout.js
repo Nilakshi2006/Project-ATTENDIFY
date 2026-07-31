@@ -31,7 +31,7 @@ async function processLogout() {
         if (userId) {
             console.log(`Terminating session for user: ${userId}`);
             
-            await fetch(`https://project-attendify.onrender.com//api/auth/logout/${userId}`, {
+            await fetch(`https://project-attendify.onrender.com/api/auth/logout/${userId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
