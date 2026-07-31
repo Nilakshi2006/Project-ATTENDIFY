@@ -35,7 +35,7 @@ form.addEventListener("submit", async function (e) {
     localStorage.setItem("user", JSON.stringify(data.user));
 
     // redirect to dashboard
-    window.location.href = "dashboard.html";
+    window.location.href = "index.html";
 
   } catch (error) {
 
