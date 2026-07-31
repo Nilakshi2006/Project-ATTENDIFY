@@ -18,7 +18,7 @@ router.post("/mark", async (req, res) => {
 
     const pythonScriptPath = path.join(
       __dirname,
-      "../../face_engine/recognize_face.py"
+      "../face_engine/recognize_face.py"
     );
 
     // Use the virtual environment python if it exists, otherwise fallback to global 'python'
