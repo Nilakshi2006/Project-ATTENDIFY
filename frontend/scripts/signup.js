@@ -49,7 +49,7 @@ form.addEventListener("submit", async function (e) {
     errorMsg.style.display = "block";
     errorMsg.style.background = "#ecfdf5";
     errorMsg.style.color = "#065f46";
-    errorMsg.innerText = "Account created successfully! Redirecting to login...";
+    errorMsg.innerText = "Account created successfully! Redirecting to Dashboard...";
 
     form.reset();
 
